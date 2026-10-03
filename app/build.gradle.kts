@@ -15,15 +15,34 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        // URL du serveur Render : lue depuis la variable GitHub "API_URL" (sinon valeur par défaut ci-dessous)
+        // URL du serveur Render : lue depuis la variable GitHub "API_URL"
+        // (sinon valeur par défaut ci-dessous)
         val apiUrl = System.getenv("API_URL")?.takeIf { it.isNotBlank() }
             ?: "https://surprise-api.onrender.com"
+
         buildConfigField("String", "API_URL", "\"$apiUrl\"")
     }
+
     buildFeatures {
         compose = true
         buildConfig = true
     }
+
+    // Java 17
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    // Kotlin JVM 17
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+}
+
+// Utiliser JDK 17 pour Kotlin
+kotlin {
+    jvmToolchain(17)
 }
 
 dependencies {
